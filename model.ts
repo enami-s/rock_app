@@ -1,32 +1,35 @@
-export enum Choice {
-    グー = "グー",
-    チョキ = "チョキ",
-    パー = "パー"
-}
+
+export type Choice = 'rock' | 'scissors' | 'paper';
 
 export class GameModel {
     playGame(userChoice: Choice): { userChoice: Choice, computerChoice: Choice, result: string } {
-        const choicesArray: Choice[] = [Choice.グー, Choice.チョキ, Choice.パー];
+        const choicesArray: Choice[] = ['rock', 'scissors', 'paper'];
         const computerChoice: Choice = choicesArray[Math.floor(Math.random() * 3)];
 
-        let result: string = "";
-
         if (userChoice === computerChoice) {
-            result = "引き分け";
-        } else if (
-            (userChoice === Choice.グー && computerChoice === Choice.チョキ) ||
-            (userChoice === Choice.チョキ && computerChoice === Choice.パー) ||
-            (userChoice === Choice.パー && computerChoice === Choice.グー)
+            return {
+                userChoice,
+                computerChoice,
+                result: '引き分け'
+            };
+        }
+
+        if (
+            (userChoice === 'rock' && computerChoice === 'scissors') ||
+            (userChoice === 'scissors' && computerChoice === 'paper') ||
+            (userChoice === 'paper' && computerChoice === 'rock')
         ) {
-            result = "勝ち";
-        } else {
-            result = "負け";
+            return {
+                userChoice,
+                computerChoice,
+                result: '勝ち'
+            };
         }
 
         return {
             userChoice,
             computerChoice,
-            result
+            result: '負け'
         };
     }
 }

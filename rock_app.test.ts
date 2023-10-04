@@ -2,10 +2,12 @@ import { GameController } from './controller';
 import { GameView } from './view';
 import { GameModel, Choice } from './model';
 
-afterEach(() => {
-    // Assuming you have an instance of GameView available as gameView
-    gameView.close();
-});
+// afterEach(() => {
+//     if (mockRandom) {
+//         mockRandom.mockRestore();
+//     }
+//     mockView.close();  // 追加: readline インターフェースを閉じる
+// });
 
 describe('RockApp', () => {
     let mockRandom;
