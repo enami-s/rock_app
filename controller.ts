@@ -6,7 +6,7 @@ export type GameResultType = {
     userChoice: string;
     computerChoice: string;
     result: string;
-} | string; // stringはエラーメッセージ用
+} | string;
 
 export class GameController {
     private readonly VALID_CHOICES: Choice[] = ['rock', 'scissors', 'paper'];
@@ -46,26 +46,6 @@ export class GameController {
         };
     }
 
-//     play() {
-//         this.view.getUserInput("グー、チョキ、パーのどれかを入力してください: ", input => {
-//             const gameResult = this.playGameWithChoice(input);
-//
-//             if (typeof gameResult === "string") { // エラーメッセージを確認
-//                 this.view.displayError(gameResult);
-//                 this.view.close();
-//                 return;
-//             }
-//
-//             const gameMessage = `
-// ユーザーの選択手: ${gameResult.userChoice}
-// コンピュータの選択手: ${gameResult.computerChoice}
-// 勝敗結果: ${gameResult.result}
-//             `.trim();
-//
-//             this.view.displayResult(gameMessage);
-//             this.view.close();
-//         });
-//     }
 
     play() {
         this.view.getUserInput("グー、チョキ、パーのどれかを入力してください: ", input => {

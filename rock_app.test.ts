@@ -38,9 +38,9 @@ describe('RockApp', () => {
             it(`should return "${scenario.expected}" when user chooses "${scenario.user}" and computer chooses "${scenario.computer}"`, () => {
                 mockRandom = jest.spyOn(Math, 'random').mockReturnValue(scenario.computerRandom);
                 const result = controller.playGameWithChoice(scenario.user as Choice);
-                expect(result).toMatch(`ユーザーの選択手: ${scenario.user}`);
-                expect(result).toMatch(`コンピュータの選択手: ${scenario.computer}`);
-                expect(result).toMatch(`勝敗結果: ${scenario.expected}`);
+                expect(result.userChoice).toBe(scenario.user);
+                expect(result.computerChoice).toBe(scenario.computer);
+                expect(result.result).toBe(scenario.expected);
             });
         });
     });

@@ -12,10 +12,6 @@ export class GameView {
         this.readlineInterface.question(question, callback);
     }
 
-    // displayResult(message: string) {
-    //     console.log(message);
-    // }
-
     displayResult(gameResult: GameResultType) {
         if (typeof gameResult === 'string') {
             console.log(gameResult);
