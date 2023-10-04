@@ -1,6 +1,5 @@
 import * as readline from 'readline';
 import { GameResultType } from './controller';
-import { Choice } from './model';
 
 export class GameView {
     private readlineInterface = readline.createInterface({
@@ -25,11 +24,13 @@ export class GameView {
         console.log(message);
     }
 
-    displayError(message: string) {
-        console.log(message);
+
+    displayError() {
+        console.log("「グー、チョキ、パーのどれかを入力し直してください」");
     }
 
     close() {
         this.readlineInterface.close();
     }
 }
+
