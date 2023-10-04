@@ -1,16 +1,18 @@
 
-export type Choice = 'rock' | 'scissors' | 'paper';
+export const choices = ['rock', 'scissors', 'paper'] as const;
+export type Choice = typeof choices[number];
+
+export type GameResult = 'win' | 'lose' | 'draw';
 
 export class GameModel {
-    playGame(userChoice: Choice): { userChoice: Choice, computerChoice: Choice, result: string } {
-        const choicesArray: Choice[] = ['rock', 'scissors', 'paper'];
-        const computerChoice: Choice = choicesArray[Math.floor(Math.random() * 3)];
+    playGame(userChoice: Choice): { userChoice: Choice, computerChoice: Choice, result: GameResult } {
+        const computerChoice: Choice = choices[Math.floor(Math.random() * choices.length)];
 
         if (userChoice === computerChoice) {
             return {
                 userChoice,
                 computerChoice,
-                result: '引き分け'
+                result: 'draw'
             };
         }
 
@@ -22,14 +24,14 @@ export class GameModel {
             return {
                 userChoice,
                 computerChoice,
-                result: '勝ち'
+                result: 'win'
             };
         }
 
         return {
             userChoice,
             computerChoice,
-            result: '負け'
+            result: 'lose'
         };
     }
 }
