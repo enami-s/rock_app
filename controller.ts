@@ -1,5 +1,6 @@
+
 import { GameView } from './view';
-import { GameModel, Choice, GameResult } from './model';
+import { GameModel, Choice } from './model';
 
 export type GameResultType = {
     userChoice: string;
@@ -9,17 +10,16 @@ export type GameResultType = {
 
 export class GameController {
     private readonly VALID_CHOICES: Choice[] = ['rock', 'scissors', 'paper'];
+    private readonly CHOICE_MAP: { [key: string]: Choice } = {
+        'グー': 'rock',
+        'チョキ': 'scissors',
+        'パー': 'paper'
+    };
 
     private readonly CHOICE_MAP_JAPANESE: { [key in Choice]: string } = {
         'rock': 'グー',
         'scissors': 'チョキ',
         'paper': 'パー'
-    };
-
-    private readonly RESULT_MAP_JAPANESE: { [key in GameResult]: string } = {
-        'win': '勝ち',
-        'lose': '負け',
-        'draw': '引き分け'
     };
 
     constructor(
@@ -30,19 +30,11 @@ export class GameController {
         this.model = model;
     }
 
-    private getChoiceFromJapanese(choiceInJapanese: string): Choice | null {
-        const entry = Object.entries(this.CHOICE_MAP_JAPANESE).find(
-            ([_, value]) => value === choiceInJapanese
-        );
-
-        return entry ? entry[0] as Choice : null;
-    }
-
     playGameWithChoice(userChoiceInJapanese: string): GameResultType {
-        const userChoice = this.getChoiceFromJapanese(userChoiceInJapanese);
+        const userChoice = this.CHOICE_MAP[userChoiceInJapanese];
 
         if (!userChoice) {
-            return null;
+            return "「グー、チョキ、パーのどれかを入力し直してください」";
         }
 
         const gameResult = this.model.playGame(userChoice);
@@ -50,23 +42,23 @@ export class GameController {
         return {
             userChoice: userChoiceInJapanese,
             computerChoice: this.CHOICE_MAP_JAPANESE[gameResult.computerChoice],
-            result: this.RESULT_MAP_JAPANESE[gameResult.result]
+            result: gameResult.result
         };
     }
+
+
     play() {
         this.view.getUserInput("グー、チョキ、パーのどれかを入力してください: ", input => {
             const gameResult = this.playGameWithChoice(input);
 
-            if (!gameResult) {
-                this.view.displayError();
+            if (typeof gameResult === "string") { // エラーメッセージを確認
+                this.view.displayError(gameResult);
                 this.view.close();
-                return ;
+                return;
             }
 
-            this.view.displayResult(gameResult);
+            this.view.displayResult(gameResult); // 日本語の表示はGameViewで行います
             this.view.close();
         });
     }
 }
-
-

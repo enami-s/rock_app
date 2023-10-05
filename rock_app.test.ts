@@ -48,7 +48,7 @@ describe('RockApp', () => {
     describe('Invalid Input', () => {
         it('should display error for string input', () => {
             const result = controller.playGameWithChoice('Test');
-            expect(result).toBeNull();
+            expect(result).toBe('「グー、チョキ、パーのどれかを入力し直してください」');
         });
     });
 });

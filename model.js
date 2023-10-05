@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GameModel = exports.choices = void 0;
-exports.choices = ['rock', 'scissors', 'paper'];
+exports.GameModel = void 0;
 var GameModel = /** @class */ (function () {
     function GameModel() {
     }
     GameModel.prototype.playGame = function (userChoice) {
-        var computerChoice = exports.choices[Math.floor(Math.random() * exports.choices.length)];
+        var choicesArray = ['rock', 'scissors', 'paper'];
+        var computerChoice = choicesArray[Math.floor(Math.random() * 3)];
         if (userChoice === computerChoice) {
             return {
                 userChoice: userChoice,
                 computerChoice: computerChoice,
-                result: 'draw'
+                result: '引き分け'
             };
         }
         if ((userChoice === 'rock' && computerChoice === 'scissors') ||
@@ -20,13 +20,13 @@ var GameModel = /** @class */ (function () {
             return {
                 userChoice: userChoice,
                 computerChoice: computerChoice,
-                result: 'win'
+                result: '勝ち'
             };
         }
         return {
             userChoice: userChoice,
             computerChoice: computerChoice,
-            result: 'lose'
+            result: '負け'
         };
     };
     return GameModel;
