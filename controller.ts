@@ -5,7 +5,7 @@ export type GameResultType = {
     userChoice: string;
     computerChoice: string;
     result: string;
-} | string;
+} ;
 
 export class GameController {
     private readonly VALID_CHOICES: Choice[] = ['rock', 'scissors', 'paper'];
@@ -38,11 +38,11 @@ export class GameController {
         return entry ? entry[0] as Choice : null;
     }
 
-    playGameWithChoice(userChoiceInJapanese: string): GameResultType {
+    playGameWithChoice(userChoiceInJapanese: string): GameResultType |null {
         const userChoice = this.getChoiceFromJapanese(userChoiceInJapanese);
 
         if (!userChoice) {
-            return '';
+            return null;
         }
 
         const gameResult = this.model.playGame(userChoice);
