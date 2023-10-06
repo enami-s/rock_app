@@ -42,7 +42,7 @@ export class GameController {
         const userChoice = this.getChoiceFromJapanese(userChoiceInJapanese);
 
         if (!userChoice) {
-            return null;
+            return '';
         }
 
         const gameResult = this.model.playGame(userChoice);
